@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">FoundFilms</string>
+    <string name="app_name">Киновыбор</string>
     <string name="as_programm">О программе</string>
     <string name="found_film">Поиск...</string>
     <string name="settings">Настройки</string>
+    <string name="add_film">Добавить фильм</string>
 </resources>
