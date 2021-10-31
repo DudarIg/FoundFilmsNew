@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoundFilms">
         <activity
-            android:name="ru.dudar.findfilms.MainActivity"
+            android:name="ru.dudar.findfilms.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,8 @@
-package ru.dudar.findfilms
+package ru.dudar.findfilms.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.dudar.findfilms.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
