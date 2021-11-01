@@ -1,5 +1,7 @@
 package ru.dudar.findfilms.data
 
+import java.io.Serializable
+
 data class Film(
     var photo : Int = 0,
     var title: String = "",
@@ -7,4 +9,4 @@ data class Film(
     var country: String = "",
     var style: String = ""
 
-)
+): Serializable

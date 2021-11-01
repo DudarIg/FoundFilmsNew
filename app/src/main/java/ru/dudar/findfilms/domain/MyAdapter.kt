@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
-
+import ru.dudar.findfilms.ui.FilmActivity
 
 
 class MyAdapter(private val films: List<Film>, private val myContext: Context):
@@ -30,10 +30,10 @@ class MyAdapter(private val films: List<Film>, private val myContext: Context):
         val film = films[position]
         holder.photo.setImageResource(film.photo)
         holder.title.text = film.title
-//        holder.itemView.setOnClickListener {
-//            val intent = OneActivity.newIntent(myContext, cat.name, cat.color, age, cat.date)
-//            myContext.startActivity(intent)
-//        }
+        holder.itemView.setOnClickListener {
+            val intent = FilmActivity.newIntent(myContext, film)
+            myContext.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

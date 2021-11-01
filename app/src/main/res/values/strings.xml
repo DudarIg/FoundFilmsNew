@@ -4,4 +4,8 @@
     <string name="found_film">Поиск...</string>
     <string name="settings">Настройки</string>
     <string name="add_film">Добавить фильм</string>
+    <string name="title">Название:</string>
+    <string name="year">Год выхода:</string>
+    <string name="tools">Название</string>
+    <string name="country">Страна</string>
 </resources>

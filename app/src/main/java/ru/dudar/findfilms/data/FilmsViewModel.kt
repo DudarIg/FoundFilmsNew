@@ -11,7 +11,7 @@ class FilmsViewModel : ViewModel() {
     init {
 
         val styles = listOf("Драма","Боевик","Фэнтези","Приключения","Комедия","Мелодрама")
-        val photos  = listOf<Int>(R.drawable.afonya, R.drawable.angel, R.drawable.avatar_17, R.drawable.bogatir,
+        val photos  = listOf(R.drawable.afonya, R.drawable.angel, R.drawable.avatar_17, R.drawable.bogatir,
             R.drawable.br_ruka, R.drawable.ekipazh2, R.drawable.elki, R.drawable.garaj)
         val title = listOf("Афоня", "Ангел", "Аватар"," Богарырь", "Брилиановая рука",
             "Экипаж", "Елки", "Гараж")
@@ -28,8 +28,6 @@ class FilmsViewModel : ViewModel() {
             } else {
                 films_bottom.add(film)
             }
-
-
         }
     }
 }
