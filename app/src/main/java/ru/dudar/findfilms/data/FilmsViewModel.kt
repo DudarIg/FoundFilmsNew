@@ -16,14 +16,14 @@ class FilmsViewModel : ViewModel() {
         val title = listOf("Афоня", "Ангел", "Аватар"," Богарырь", "Брилиановая рука",
             "Экипаж", "Елки", "Гараж")
 
-        for (i in 0 until 8) {
+        (0..7).forEach {
             val film = Film()
-            film.photo = photos[i]
-            film.title = title[i]
+            film.photo = photos[it]
+            film.title = title[it]
             film.year = Random.nextInt(41)+1980
             film.country = "Россия"
             film.style = styles.random()
-            if ( i % 2 == 0) {
+            if ( it % 2 == 0) {
                 films_top.add(film)
             } else {
                 films_bottom.add(film)
