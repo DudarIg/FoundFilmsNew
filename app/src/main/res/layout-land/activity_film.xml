@@ -5,16 +5,20 @@
     android:padding="@dimen/margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".ui.FilmActivity">
 
     <ImageView
         android:id="@+id/film_imageView"
         android:adjustViewBounds="true"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         app:srcCompat="@drawable/bogatir" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_marginTop="@dimen/text_title"
         android:orientation="horizontal"
@@ -95,6 +99,7 @@
             android:id="@+id/style_textView"
             tools:text="@string/tools"
             android:layout_marginStart="@dimen/margin"/>
+    </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
