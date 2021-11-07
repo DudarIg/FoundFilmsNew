@@ -7,19 +7,18 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/recycler_top"
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/white"
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        android:background="@color/teal_700"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="wrap_content"/>
 
-        android:id="@+id/recycler_bottom"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-
+        android:layout_height="match_parent"
         android:layout_weight="1"/>
 
 

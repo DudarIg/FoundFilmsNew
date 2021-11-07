@@ -2,11 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/margin"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".ui.FilmActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/margin"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/film_imageView"
@@ -99,6 +105,7 @@
             android:id="@+id/style_textView"
             tools:text="@string/tools"
             android:layout_marginStart="@dimen/margin"/>
+    </LinearLayout>
     </LinearLayout>
     </LinearLayout>
 

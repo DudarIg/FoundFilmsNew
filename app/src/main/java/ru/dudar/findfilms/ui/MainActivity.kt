@@ -1,46 +1,47 @@
 package ru.dudar.findfilms.ui
 
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import ru.dudar.findfilms.R
-import ru.dudar.findfilms.data.FilmsViewModel
+import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.domain.MyAdapter
 
+class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks {
 
-class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val filmsViewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
+        initToolbar()
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            val recyclerViewTop: RecyclerView = findViewById(R.id.recycler_top)
-            recyclerViewTop.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewTop.adapter = MyAdapter(filmsViewModel.films_top, this)
-
-            val recyclerViewBottom: RecyclerView = findViewById(R.id.recycler_bottom)
-            recyclerViewBottom.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewBottom.adapter = MyAdapter(filmsViewModel.films_bottom, this)
+        val filmsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (filmsFragment == null) {
+            val fragment = FilmsFragment.newInstanse()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment)
+                .commit()
         }
-
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            val recyclerViewTop: RecyclerView = findViewById(R.id.recycler_top)
-            recyclerViewTop.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewTop.adapter = MyAdapter(filmsViewModel.films_top + filmsViewModel.films_bottom, this)
-
-        }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu);
         return true
+    }
+
+    private fun initToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+    }
+
+    override fun onFilmSelect(film: Film) {
+        val fragment = OneFilmFragment.newInstance(film)
+            supportFragmentManager
+                .beginTransaction().replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
     }
 }
