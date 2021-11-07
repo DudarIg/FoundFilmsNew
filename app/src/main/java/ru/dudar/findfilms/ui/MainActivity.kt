@@ -27,6 +27,14 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks {
         }
     }
 
+    override fun onFilmSelect(film: Film) {
+        val fragment = OneFilmFragment.newInstance(film)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu);
         return true
@@ -37,11 +45,5 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks {
         setSupportActionBar(toolbar)
     }
 
-    override fun onFilmSelect(film: Film) {
-        val fragment = OneFilmFragment.newInstance(film)
-            supportFragmentManager
-                .beginTransaction().replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
-    }
+
 }
