@@ -9,21 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.FilmsViewModel
+import ru.dudar.findfilms.databinding.ActivityFilmBinding
+import ru.dudar.findfilms.databinding.FilmsFragmentBinding
 import ru.dudar.findfilms.domain.MyAdapter
 
-class FilmsFragment : Fragment() {
-    private lateinit var recyclerViewTop: RecyclerView
-    private lateinit var recyclerViewBottom: RecyclerView
+class FilmsFragment : Fragment(R.layout.films_fragment) {
     private lateinit var filmsViewModel: FilmsViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.films_fragment, container, false)
-    }
+    private val binding by viewBinding(FilmsFragmentBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,22 +31,17 @@ class FilmsFragment : Fragment() {
 
     private fun recyclers_init(view: View) {
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerViewTop = view.findViewById(R.id.recycler_top)
-            recyclerViewTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewTop.adapter = MyAdapter(filmsViewModel.films_top)
+            binding.recyclerTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerTop.adapter = MyAdapter(filmsViewModel.films_top)
 
-            recyclerViewBottom = view.findViewById(R.id.recycler_bottom)
-            recyclerViewBottom.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewBottom.adapter = MyAdapter(filmsViewModel.films_bottom)
+            binding.recyclerBottom?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerBottom?.adapter = MyAdapter(filmsViewModel.films_bottom)
         }
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerViewTop = view.findViewById(R.id.recycler_top)
-            recyclerViewTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            recyclerViewTop.adapter = MyAdapter(filmsViewModel.films_top + filmsViewModel.films_bottom)
-
+            binding.recyclerTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerTop.adapter = MyAdapter(filmsViewModel.films_top + filmsViewModel.films_bottom)
         }
-
     }
 
     companion object {
