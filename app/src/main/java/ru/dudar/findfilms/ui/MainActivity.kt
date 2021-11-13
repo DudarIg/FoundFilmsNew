@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks {
 
         val filmsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (filmsFragment == null) {
-            val fragment = FilmsFoundFragment.newInstance()    //FilmsFragment.newInstanse()
+            val fragment = FilmsFragment.newInstanse()
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragment)
                 .commit()

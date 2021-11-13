@@ -16,7 +16,6 @@ import ru.dudar.findfilms.api.KinopoiskRepo
 
 private const val TAG = "WWW"
 
-
 class FilmsFoundFragment : Fragment() {
 
     private lateinit var recyclerViewTop: RecyclerView
@@ -26,11 +25,10 @@ class FilmsFoundFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val kinopoiskLiveData: LiveData<String> = KinopoiskRepo().fetchContens()
+        val kinopoiskLiveData: LiveData<String> = KinopoiskRepo().popularCallback()
 
         kinopoiskLiveData.observe(this,
-        Observer {
-            responseString ->
+        Observer { responseString ->
             Log.d(TAG, "Ответ сервера: $responseString")
         })
     }

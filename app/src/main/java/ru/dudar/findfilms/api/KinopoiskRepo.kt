@@ -23,20 +23,18 @@ class KinopoiskRepo {
         kinopoiskApi = retrofit.create(KinopoiskApi::class.java)
     }
 
-    fun fetchContens() : LiveData<String> {
+    fun popularCallback() : LiveData<String> {
         val responseLiveData: MutableLiveData<String> = MutableLiveData()
-        val kinopoiskRequest: Call<String> = kinopoiskApi.fetchContents()
+        val kinopoiskRequest: Call<String> = kinopoiskApi.popularFilms()
 
         kinopoiskRequest.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Log.d(TAG, "Ответ сервера")
                 responseLiveData.value = response.body()
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d(TAG, "Ошибка")
             }
-
         } )
         return responseLiveData
     }
