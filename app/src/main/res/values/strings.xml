@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Киновыбор</string>
     <string name="as_programm">О программе</string>
-    <string name="found_film">Поиск...</string>
+    <string name="found_film">Жанры фильмов</string>
     <string name="settings">Настройки</string>
     <string name="add_film">Добавить фильм</string>
     <string name="title">Название:</string>
@@ -13,4 +13,6 @@
     <string name="programm">О программе</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ganry">Показать жанры</string>
+    <string name="cite">TheMovieDb.org</string>
 </resources>

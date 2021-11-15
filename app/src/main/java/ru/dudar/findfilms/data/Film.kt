@@ -1,8 +1,11 @@
 package ru.dudar.findfilms.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import java.io.Serializable
+
+
+//import android.os.Parcelable
+//import kotlinx.parcelize.Parcelize
+
 
 data class Film  (
     var photo: Int = 0,

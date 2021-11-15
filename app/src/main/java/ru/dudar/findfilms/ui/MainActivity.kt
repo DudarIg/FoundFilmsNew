@@ -17,6 +17,7 @@ import ru.dudar.findfilms.domain.MyAdapter
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
 
+    lateinit var toolbar : Toolbar
     private var bottomMenuView: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
 
         val filmsFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (filmsFragment == null) {
+
             val fragment = FilmsFragment.newInstanse()
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragment)
@@ -49,8 +51,9 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
     }
 
     private fun initBottomMenu() {
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
                     fragment = ProgrammFragment.newInstance()
                 }
                 R.id.found_film -> {
+
                     fragment = FoundFilmFragment.newInstance()
                 }
                 R.id.as_settings -> {
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     override fun onDisableButton(bool: Boolean, idMenu: Int) {
         var menuItem = bottomMenuView!!.menu.findItem(idMenu)
             menuItem.isVisible = bool
+
 
     }
 

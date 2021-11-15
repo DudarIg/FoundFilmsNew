@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         app:titleTextColor="@color/white"
         android:id="@+id/toolbar"
-        app:title="@string/app_name"
+        app:title="@string/cite"
         android:background="@color/teal_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
