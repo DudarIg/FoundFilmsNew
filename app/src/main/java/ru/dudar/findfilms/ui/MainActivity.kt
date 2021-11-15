@@ -17,6 +17,7 @@ import ru.dudar.findfilms.domain.MyAdapter
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
 
+
     lateinit var toolbar : Toolbar
     private var bottomMenuView: BottomNavigationView? = null
 
