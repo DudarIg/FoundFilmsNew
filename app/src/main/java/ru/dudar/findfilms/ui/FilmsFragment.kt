@@ -31,16 +31,20 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
 
     private fun recyclers_init(view: View) {
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            binding.recyclerTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerTop.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerTop.adapter = MyAdapter(filmsViewModel.films_top)
 
-            binding.recyclerBottom?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerBottom?.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerBottom?.adapter = MyAdapter(filmsViewModel.films_bottom)
         }
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            binding.recyclerTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.recyclerTop.adapter = MyAdapter(filmsViewModel.films_top + filmsViewModel.films_bottom)
+            binding.recyclerTop.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerTop.adapter =
+                MyAdapter(filmsViewModel.films_top + filmsViewModel.films_bottom)
         }
     }
 
