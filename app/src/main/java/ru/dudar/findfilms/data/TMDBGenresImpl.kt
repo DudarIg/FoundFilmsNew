@@ -1,9 +1,13 @@
 package ru.dudar.findfilms.data
 
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import by.kirich1409.viewbindingdelegate.activityViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import ru.dudar.findfilms.domain.TheMovieGenres
 import ru.dudar.findfilms.domain.Themoviedb
+import ru.dudar.findfilms.ui.MainActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -29,6 +33,8 @@ class TMDBGenresImpl : Themoviedb {
             resultArray.forEach {
                 result.add(it)
             }
+        } catch (ex: Exception) {
+                        return result
         } finally {
             connection?.disconnect()
         }

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.TMDBGenresImpl
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
@@ -33,16 +34,25 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         binding.progressBar.isVisible = true
         Thread {
             val resJson = getTheMoviegen.getTMDBGenresSync()
-            val sb = StringBuilder()
-            resJson.forEach {
-                it.genres.forEach() {
-                    sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
+
+            if (resJson.size != 0) {
+                val sb = StringBuilder()
+                resJson.forEach {
+                    it.genres.forEach() {
+                        sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
+                    }
+                }
+                runOnUiThread {
+                    binding.progressBar.isVisible = false
+                    binding.loadTextView.text = sb.toString()
+                }
+            } else {
+                runOnUiThread {
+                    binding.progressBar.isVisible = false
+                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
                 }
             }
-            runOnUiThread {
-                binding.progressBar.isVisible = false
-                binding.loadTextView.text = sb.toString()
-            }
+
         }.start()
     }
 
