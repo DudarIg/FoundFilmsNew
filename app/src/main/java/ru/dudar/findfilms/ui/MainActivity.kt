@@ -97,5 +97,10 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
 
     }
 
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
+    }
+
 
 }
