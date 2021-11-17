@@ -22,8 +22,7 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title =
-            resources.getString(R.string.found_film)
+        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.found_film)
 
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
@@ -55,12 +54,6 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
 
         }.start()
     }
-
-//    fun Fragment?.runOnUiThread(action: () -> Unit) {
-//        this ?: return
-//        if (!isAdded) return
-//        activity?.runOnUiThread(action)
-//    }
 
     override fun onStop() {
         super.onStop()

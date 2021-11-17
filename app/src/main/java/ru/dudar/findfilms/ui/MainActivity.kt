@@ -1,20 +1,18 @@
 package ru.dudar.findfilms.ui
 
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.MainBroadcastReceiver
+import ru.dudar.findfilms.data.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.MyAdapter
 
@@ -45,6 +43,9 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     }
 
     override fun onFilmSelect(film: Film) {
+        startService(Intent(this,
+                       ServiceFilmView::class.java).putExtra("film", film) )
+
         val fragment = OneFilmFragment.newInstance(film)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)

@@ -7,6 +7,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.databinding.ActivityFilmBinding
+import java.io.File
+import java.io.FileOutputStream
 
 private const val ARG_PARAM = "param"
 
@@ -31,6 +33,7 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         binding.countryTextView.text = film!!.country
         binding.styleTextView.text = film!!.style
 
+
     }
 
     companion object {
@@ -42,4 +45,6 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
                 }
             }
     }
+
+
 }
