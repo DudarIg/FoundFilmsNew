@@ -42,12 +42,12 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
                         sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
                     }
                 }
-                runOnUiThread {
+                activity?.runOnUiThread {
                     binding.progressBar.isVisible = false
                     binding.loadTextView.text = sb.toString()
                 }
             } else {
-                runOnUiThread {
+                activity?.runOnUiThread {
                     binding.progressBar.isVisible = false
                     Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
                 }
@@ -56,11 +56,11 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         }.start()
     }
 
-    fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return
-        activity?.runOnUiThread(action)
-    }
+//    fun Fragment?.runOnUiThread(action: () -> Unit) {
+//        this ?: return
+//        if (!isAdded) return
+//        activity?.runOnUiThread(action)
+//    }
 
     override fun onStop() {
         super.onStop()

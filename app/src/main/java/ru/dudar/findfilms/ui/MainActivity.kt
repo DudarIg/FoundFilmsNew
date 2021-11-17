@@ -1,5 +1,7 @@
 package ru.dudar.findfilms.ui
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,10 +14,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
+import ru.dudar.findfilms.data.MainBroadcastReceiver
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.MyAdapter
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
+
+    private val receiver = MainBroadcastReceiver()
 
 
     lateinit var toolbar: Toolbar
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         initToolbar()
         initBottomMenu()
 
