@@ -6,54 +6,73 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.LiveData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import ru.dudar.findfilms.R
+import ru.dudar.findfilms.data.RetrofitTMDBGenresImpl
 import ru.dudar.findfilms.data.TMDBGenresImpl
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
 import ru.dudar.findfilms.domain.Disable
-import ru.dudar.findfilms.domain.Themoviedb
+import ru.dudar.findfilms.domain.TMDBGenres
+import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
 
 class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
 
     private val binding by viewBinding(FragmentFoundFilmBinding::bind)
-    private val getTheMoviegen: Themoviedb by lazy { TMDBGenresImpl() }
+    private val getTheMoviegen: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.found_film)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            resources.getString(R.string.found_film)
 
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
-        ganresLoad()
-    }
 
-    private fun ganresLoad() {
-        binding.progressBar.isVisible = true
-        Thread {
-            val resJson = getTheMoviegen.getTMDBGenresSync()
-
-            if (resJson.size != 0) {
+       getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
+           if (it.size != 0) {
                 val sb = StringBuilder()
-                resJson.forEach {
+                it.forEach {
                     it.genres.forEach() {
                         sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
                     }
                 }
-                activity?.runOnUiThread {
-                    binding.progressBar.isVisible = false
-                    binding.loadTextView.text = sb.toString()
-                }
+                binding.progressBar.isVisible = false
+                binding.loadTextView.text = sb.toString()
             } else {
-                activity?.runOnUiThread {
-                    binding.progressBar.isVisible = false
-                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
-                }
+                binding.progressBar.isVisible = false
+                Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
             }
-
-        }.start()
+        }
     }
+
+//    private fun ganresLoad() {
+//        binding.progressBar.isVisible = true
+//        Thread {
+//            val resJson = getTheMoviegen.getTMDBGenresSync()
+//
+//            if (resJson.size != 0) {
+//                val sb = StringBuilder()
+//                resJson.forEach {
+//                    it.genres.forEach() {
+//                        sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
+//                    }
+//                }
+//                activity?.runOnUiThread {
+//                    binding.progressBar.isVisible = false
+//                    binding.loadTextView.text = sb.toString()
+//                }
+//            } else {
+//                activity?.runOnUiThread {
+//                    binding.progressBar.isVisible = false
+//                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//        }.start()
+//    }
 
     override fun onStop() {
         super.onStop()

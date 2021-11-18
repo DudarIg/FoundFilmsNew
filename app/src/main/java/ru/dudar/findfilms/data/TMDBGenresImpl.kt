@@ -1,19 +1,15 @@
 package ru.dudar.findfilms.data
 
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.activityViewBinding
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.LiveData
 import com.google.gson.Gson
-import ru.dudar.findfilms.domain.TheMovieGenres
-import ru.dudar.findfilms.domain.Themoviedb
-import ru.dudar.findfilms.ui.MainActivity
+import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
+import ru.dudar.findfilms.domain.TMDBGenres
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class TMDBGenresImpl : Themoviedb {
+class TMDBGenresImpl : TMDBGenres {
     private val theMovieDb = "https://api.themoviedb.org/3/genre/" +
             "movie/list?api_key=13826f824fac01ddb5cfe3a61935b835&language=ru"
     private val gson by lazy { Gson() }
@@ -39,6 +35,10 @@ class TMDBGenresImpl : Themoviedb {
             connection?.disconnect()
         }
         return result
+    }
+
+    override fun getGenres(): LiveData<List<TheMovieGenres>> {
+        TODO("Not yet implemented")
     }
 
     override fun getTMDBGenresAsync(callback: (List<TheMovieGenres>) -> Unit) {
