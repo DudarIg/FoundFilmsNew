@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.dudar.findfilms.data.api.TheMoviesdbApi
 import ru.dudar.findfilms.domain.TMDBGenres
 import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
+import ru.dudar.findfilms.domain.films.Films
 
 private const val BASEDB = "https://api.themoviedb.org/3/"
 
@@ -23,7 +24,7 @@ class RetrofitTMDBGenresImpl : TMDBGenres {
     private val api: TheMoviesdbApi = retrofit.create(TheMoviesdbApi::class.java)
 
     override fun getTMDBGenresSync(): TheMovieGenres? {
-        var result = api.loadGanges().execute().body() ?: null
+        val result = api.loadGanges().execute().body() ?: null
         return result
 
     }
@@ -44,5 +45,24 @@ class RetrofitTMDBGenresImpl : TMDBGenres {
         })
         return liveData
     }
+
+    override fun getFilmsGanre(ganre: Int): Films? {
+        val result = api.loadFilmsGanre(ganre).execute().body()
+        return result
+    }
+
+//    override fun getFilmsGanre(ganre: Int): LiveData<Films> {
+//        val liveData: MutableLiveData<Films> = MutableLiveData()
+//        api.loadFilmsGanre(ganre).enqueue(object : Callback<Films> {
+//            override fun onResponse(call: Call<Films>, response: Response<Films>) {
+//                liveData.value = response.body()
+//            }
+//
+//            override fun onFailure(call: Call<Films>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//        return liveData
+//    }
 
 }

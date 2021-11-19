@@ -4,34 +4,50 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.dudar.findfilms.R
+import ru.dudar.findfilms.domain.TMDBGenres
 import kotlin.random.Random
 
 class FilmsViewModel : ViewModel() {
     val films_top = mutableListOf<Film>()
     val films_bottom = mutableListOf<Film>()
-
+    private val films: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
+    private val films1: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     init {
+//
+//        val styles = listOf("Драма","Боевик","Фэнтези","Приключения","Комедия","Мелодрама")
+//        val photos  = listOf(R.drawable.afonya, R.drawable.angel, R.drawable.avatar_17, R.drawable.bogatir,
+//            R.drawable.br_ruka, R.drawable.ekipazh2, R.drawable.elki, R.drawable.garaj, R.drawable.loveand,
+//            R.drawable.moscow, R.drawable.sl_roman,R.drawable.volga_volga)
+//        val title = listOf("Афоня", "Ангел", "Аватар"," Богарырь", "Брилиановая рука",
+//            "Экипаж", "Елки", "Гараж","Любовь и голуби", "Москва слезам не верит",
+//            "Служебный роман", "Волга-Волга")
 
-        val styles = listOf("Драма","Боевик","Фэнтези","Приключения","Комедия","Мелодрама")
-        val photos  = listOf(R.drawable.afonya, R.drawable.angel, R.drawable.avatar_17, R.drawable.bogatir,
-            R.drawable.br_ruka, R.drawable.ekipazh2, R.drawable.elki, R.drawable.garaj, R.drawable.loveand,
-            R.drawable.moscow, R.drawable.sl_roman,R.drawable.volga_volga)
-        val title = listOf("Афоня", "Ангел", "Аватар"," Богарырь", "Брилиановая рука",
-            "Экипаж", "Елки", "Гараж","Любовь и голуби", "Москва слезам не верит",
-            "Служебный роман", "Волга-Волга")
+        Thread {
+            val films = films.getFilmsGanre(14)
 
-        (0..11).forEach {
-            val film = Film()
-            film.photo = photos[it]
-            film.title = title[it]
-            film.year = Random.nextInt(41)+1980
-            film.country = "Россия"
-            film.style = styles.random()
-            if ( it % 2 == 0) {
+            films!!.items.forEach {
+                val film = Film()
+                film.id = it.id
+                film.photo = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${it.posterPath}"
+                film.title = it.title
+                film.year = it.releaseDate.substring(0,4)
+                film.style = films.id
                 films_top.add(film)
-            } else {
-                films_bottom.add(film)
             }
-        }
+            val films1 = films1.getFilmsGanre(35)
+
+            films1!!.items.forEach {
+                val film1 = Film()
+                film1.id = it.id
+                film1.photo = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${it.posterPath}"
+                film1.title = it.title
+                film1.year = it.releaseDate.substring(0,4)
+                film1.style = films1.id
+                films_bottom.add(film1)
+            }
+            //Thread.sleep(5_000)
+        }.start()
+
+
     }
 }

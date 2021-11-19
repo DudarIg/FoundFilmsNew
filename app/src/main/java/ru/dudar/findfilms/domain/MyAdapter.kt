@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
 
@@ -21,11 +22,14 @@ class MyAdapter(private val films: List<Film>):
         }
 
         val photo: ImageView = itemView.findViewById(R.id.photo_imageview)
-        val title : TextView = itemView.findViewById(R.id.title_textview)
+        //val title : TextView = itemView.findViewById(R.id.title_textview)
 
         fun setData(film: Film) {
-             photo.setImageResource(film.photo)
-             title.text = film.title
+            Glide.with(holderContext)
+                .load(film.photo)
+                .into(photo)
+             //title.text = film.style
+
 
             itemView.setOnClickListener {
                 val callbacks = holderContext as Callbacks

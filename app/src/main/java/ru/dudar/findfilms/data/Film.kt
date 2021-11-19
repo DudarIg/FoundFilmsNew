@@ -8,10 +8,10 @@ import java.io.Serializable
 
 
 data class Film  (
-    var photo: Int = 0,
+    var id : Int = 0,
+    var photo: String = "",
     var title: String = "",
-    var year: Int = 0,
-    var country: String = "",
+    var year: String = "",
     var style: String = ""
 
 ): Serializable

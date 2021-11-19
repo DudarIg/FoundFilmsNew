@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
 import ru.dudar.findfilms.domain.TMDBGenres
+import ru.dudar.findfilms.domain.films.Films
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -35,6 +36,10 @@ class TMDBGenresImpl : TMDBGenres {
     }
 
     override fun getGenres(): LiveData<TheMovieGenres?> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFilmsGanre(ganre: Int): Films {
         TODO("Not yet implemented")
     }
 }

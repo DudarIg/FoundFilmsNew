@@ -3,10 +3,12 @@ package ru.dudar.findfilms.ui
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -24,7 +26,10 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         filmsViewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
+        SystemClock.sleep(5_000)
+
         recyclers_init(view)
 
     }
