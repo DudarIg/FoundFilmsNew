@@ -5,4 +5,5 @@
     <dimen name="margin4">4dp</dimen>
     <dimen name="margin8">8dp</dimen>
     <dimen name="text">14dp</dimen>
+    <dimen name="text16sp">16sp</dimen>
 </resources>

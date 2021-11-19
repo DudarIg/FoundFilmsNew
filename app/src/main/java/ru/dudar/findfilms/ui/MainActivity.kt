@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     }
 
     override fun onFilmSelect(film: Film) {
-//        startService(Intent(this,
-//                       ServiceFilmView::class.java).putExtra("film", film) )
+        startService(Intent(this,
+                       ServiceFilmView::class.java).putExtra("film", film) )
 
         val fragment = OneFilmFragment.newInstance(film)
         supportFragmentManager.beginTransaction()
