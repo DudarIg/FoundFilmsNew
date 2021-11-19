@@ -13,7 +13,7 @@ import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
 
 private const val BASEDB = "https://api.themoviedb.org/3/"
 
-class RetrofitTMDBGenresImpl: TMDBGenres {
+class RetrofitTMDBGenresImpl : TMDBGenres {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASEDB)
@@ -22,51 +22,27 @@ class RetrofitTMDBGenresImpl: TMDBGenres {
 
     private val api: TheMoviesdbApi = retrofit.create(TheMoviesdbApi::class.java)
 
-
-    override fun getTMDBGenresSync(): List<TheMovieGenres> {
-        val result = api.loadGanges().execute().body() ?: emptyList()
+    override fun getTMDBGenresSync(): TheMovieGenres? {
+        var result = api.loadGanges().execute().body() ?: null
         return result
 
     }
 
-    override fun getGenres(): LiveData<List<TheMovieGenres>> {
-        val liveData: MutableLiveData<List<TheMovieGenres>> = MutableLiveData()
-
-        api.loadGanges().enqueue(object: Callback<List<TheMovieGenres>>{
+    override fun getGenres(): LiveData<TheMovieGenres?> {
+        val liveData: MutableLiveData<TheMovieGenres?> = MutableLiveData()
+        api.loadGanges().enqueue(object : Callback<TheMovieGenres?> {
             override fun onResponse(
-                call: Call<List<TheMovieGenres>>,
-                response: Response<List<TheMovieGenres>>
+                call: Call<TheMovieGenres?>,
+                response: Response<TheMovieGenres?>
             ) {
-
-                liveData.postValue(response.body())
+                liveData.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<TheMovieGenres>>, t: Throwable) {
+            override fun onFailure(call: Call<TheMovieGenres?>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-
-        } )
-
+        })
         return liveData
-
-
-    }
-
-    override fun getTMDBGenresAsync(callback: (List<TheMovieGenres>) -> Unit) {
-        api.loadGanges().enqueue(object: Callback<List<TheMovieGenres>> {
-
-            override fun onResponse(
-                call: Call<List<TheMovieGenres>>,
-                response: Response<List<TheMovieGenres>>
-            ) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onFailure(call: Call<List<TheMovieGenres>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        } )
     }
 
 }

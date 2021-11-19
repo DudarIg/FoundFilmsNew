@@ -14,8 +14,8 @@ class TMDBGenresImpl : TMDBGenres {
             "movie/list?api_key=13826f824fac01ddb5cfe3a61935b835&language=ru"
     private val gson by lazy { Gson() }
 
-    override fun getTMDBGenresSync(): List<TheMovieGenres> {
-        val result = emptyList<TheMovieGenres>().toMutableList()
+    override fun getTMDBGenresSync(): TheMovieGenres? {
+        var result: TheMovieGenres? = null
         var connection: HttpURLConnection? = null
         try {
             val url = URL(theMovieDb)
@@ -24,25 +24,17 @@ class TMDBGenresImpl : TMDBGenres {
             connection.connectTimeout = 5_000
             val bufferedReader = BufferedReader(InputStreamReader(connection.inputStream))
             val results = bufferedReader.readLines().toString()
-            val resultArray = gson.fromJson(results, Array<TheMovieGenres>::class.java)
+            result = gson.fromJson(results, TheMovieGenres::class.java)
 
-            resultArray.forEach {
-                result.add(it)
-            }
         } catch (ex: Exception) {
-                        return result
+                        result = null
         } finally {
             connection?.disconnect()
         }
         return result
     }
 
-    override fun getGenres(): LiveData<List<TheMovieGenres>> {
+    override fun getGenres(): LiveData<TheMovieGenres?> {
         TODO("Not yet implemented")
     }
-
-    override fun getTMDBGenresAsync(callback: (List<TheMovieGenres>) -> Unit) {
-        TODO("Not yet implemented")
-    }
-
 }

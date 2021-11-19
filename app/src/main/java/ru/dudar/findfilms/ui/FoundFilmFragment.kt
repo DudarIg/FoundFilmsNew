@@ -31,13 +31,19 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
 
-       getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
-           if (it.size != 0) {
+
+//    ganresLoadSync()
+      ganresLoadLiveData()
+
+    }
+
+    private fun ganresLoadLiveData() {
+        binding.progressBar.isVisible = true
+        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
+            if (it != null) {
                 val sb = StringBuilder()
-                it.forEach {
-                    it.genres.forEach() {
-                        sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
-                    }
+                it.genres.forEach() {
+                    sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
                 }
                 binding.progressBar.isVisible = false
                 binding.loadTextView.text = sb.toString()
@@ -48,31 +54,29 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         }
     }
 
-//    private fun ganresLoad() {
-//        binding.progressBar.isVisible = true
-//        Thread {
-//            val resJson = getTheMoviegen.getTMDBGenresSync()
-//
-//            if (resJson.size != 0) {
-//                val sb = StringBuilder()
-//                resJson.forEach {
-//                    it.genres.forEach() {
-//                        sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
-//                    }
-//                }
-//                activity?.runOnUiThread {
-//                    binding.progressBar.isVisible = false
-//                    binding.loadTextView.text = sb.toString()
-//                }
-//            } else {
-//                activity?.runOnUiThread {
-//                    binding.progressBar.isVisible = false
-//                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//        }.start()
-//    }
+    private fun ganresLoadSync() {
+        binding.progressBar.isVisible = true
+        Thread {
+            val resJson = getTheMoviegen.getTMDBGenresSync()
+
+            if (resJson != null) {
+                val sb = StringBuilder()
+                resJson.genres.forEach {
+                        sb.appendLine("id=${it.id.toString()}  жанр: ${it.name.toString()}")
+                }
+                activity?.runOnUiThread {
+                    binding.progressBar.isVisible = false
+                    binding.loadTextView.text = sb.toString()
+                }
+            } else {
+                activity?.runOnUiThread {
+                    binding.progressBar.isVisible = false
+                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+
+        }.start()
+    }
 
     override fun onStop() {
         super.onStop()

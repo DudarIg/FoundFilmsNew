@@ -3,7 +3,7 @@ package ru.dudar.findfilms.data
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import ru.dudar.findfilms.Utils
+import java.io.File
 import ru.dudar.findfilms.data.Film as Film
 
 class ServiceFilmView : Service() {
@@ -11,7 +11,9 @@ class ServiceFilmView : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val data = intent?.getSerializableExtra("film") as Film
         Thread {
-            Utils.saveFilm(this, data)
+            val path = this.getFilesDir()
+            val file = File(path, "FilmsView.txt")
+            file.appendText("${data!!.style} ${data!!.title}\n")
             stopSelf(startId)
         }.start()
 
