@@ -26,7 +26,6 @@ class RetrofitTMDBGenresImpl : TMDBGenres {
     override fun getTMDBGenresSync(): TheMovieGenres? {
         val result = api.loadGanges().execute().body() ?: null
         return result
-
     }
 
     override fun getGenres(): LiveData<TheMovieGenres?> {
@@ -50,19 +49,5 @@ class RetrofitTMDBGenresImpl : TMDBGenres {
         val result = api.loadFilmsGanre(ganre).execute().body()
         return result
     }
-
-//    override fun getFilmsGanre(ganre: Int): LiveData<Films> {
-//        val liveData: MutableLiveData<Films> = MutableLiveData()
-//        api.loadFilmsGanre(ganre).enqueue(object : Callback<Films> {
-//            override fun onResponse(call: Call<Films>, response: Response<Films>) {
-//                liveData.value = response.body()
-//            }
-//
-//            override fun onFailure(call: Call<Films>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//        return liveData
-//    }
 
 }

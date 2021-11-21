@@ -11,5 +11,5 @@ interface TMDBGenres {
 
     fun getGenres(): LiveData<TheMovieGenres?>
 
-    fun getFilmsGanre(ganre:Int): Films?
+    fun getFilmsGanre(ganre: Int): Films?
 }

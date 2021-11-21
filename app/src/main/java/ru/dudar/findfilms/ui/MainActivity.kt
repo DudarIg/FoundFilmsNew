@@ -108,10 +108,4 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
         super.onDestroy()
     }
 
-    public fun ffff(): List<String> {
-        val path = this.getFilesDir()
-        return File(path, "GanrView.txt").readLines()
-    }
-
-
 }

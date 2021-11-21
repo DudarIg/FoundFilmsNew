@@ -1,15 +1,9 @@
 package ru.dudar.findfilms.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
-import ru.dudar.findfilms.R
 import ru.dudar.findfilms.domain.TMDBGenres
 import ru.dudar.findfilms.domain.films.Films
-import ru.dudar.findfilms.ui.MainActivity
-import java.io.File
-import java.security.AccessController.getContext
-import kotlin.random.Random
 
 class FilmsViewModel : ViewModel() {
     var films_top = mutableListOf<Film>()

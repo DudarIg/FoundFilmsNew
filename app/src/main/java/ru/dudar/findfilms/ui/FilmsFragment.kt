@@ -31,7 +31,6 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
         SystemClock.sleep(5_000)
 
         recyclers_init(view)
-
     }
 
     private fun recyclers_init(view: View) {

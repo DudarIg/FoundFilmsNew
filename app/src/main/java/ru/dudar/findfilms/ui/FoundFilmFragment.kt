@@ -43,14 +43,13 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
 
- //       ganresLoadSync()
-     ganresLoadLiveData()
-
+        //       ganresLoadSync()
+        ganresLoadLiveData()
 
     }
 
     private fun ganresLoadLiveData() {
-        var ganrView : List<String>
+        var ganrView: List<String>
         binding.progressBar.isVisible = true
         getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
             if (it != null) {
@@ -77,7 +76,7 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
     private fun ganresLoadSync() {
 
         binding.progressBar.isVisible = true
-        var ganrView : List<String>
+        var ganrView: List<String>
         Thread {
             val resJson = getTheMoviegen.getTMDBGenresSync()
 
