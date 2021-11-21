@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.domain.TMDBGenres
 import ru.dudar.findfilms.domain.films.Films
+import ru.dudar.findfilms.ui.MainActivity
+import java.io.File
+import java.security.AccessController.getContext
 import kotlin.random.Random
 
 class FilmsViewModel : ViewModel() {
@@ -13,13 +16,14 @@ class FilmsViewModel : ViewModel() {
     var films_bottom = mutableListOf<Film>()
     var filmsJson: Films? = null
     private val films: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
+    var ganr : List<String> = listOf("14", "35")
 
     init {
         Thread {
-            filmsJson = films.getFilmsGanre(14)
+            filmsJson = films.getFilmsGanre(ganr[0].toInt())
             films_top = filmsToList(filmsJson!!)
 
-            filmsJson = films.getFilmsGanre(35)
+            filmsJson = films.getFilmsGanre(ganr[1].toInt())
             films_bottom = filmsToList(filmsJson!!)
 
         }.start()
@@ -35,6 +39,7 @@ class FilmsViewModel : ViewModel() {
             film.year = it.releaseDate.substring(0, 4)
             film.style = jsonFilms.id
             filmList.add(film)
+
         }
         return filmList
     }

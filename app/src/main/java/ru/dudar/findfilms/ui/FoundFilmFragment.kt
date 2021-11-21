@@ -46,6 +46,7 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
  //       ganresLoadSync()
      ganresLoadLiveData()
 
+
     }
 
     private fun ganresLoadLiveData() {
