@@ -13,14 +13,6 @@ class FilmsViewModel : ViewModel() {
     private val films: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     private val films1: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     init {
-//
-//        val styles = listOf("Драма","Боевик","Фэнтези","Приключения","Комедия","Мелодрама")
-//        val photos  = listOf(R.drawable.afonya, R.drawable.angel, R.drawable.avatar_17, R.drawable.bogatir,
-//            R.drawable.br_ruka, R.drawable.ekipazh2, R.drawable.elki, R.drawable.garaj, R.drawable.loveand,
-//            R.drawable.moscow, R.drawable.sl_roman,R.drawable.volga_volga)
-//        val title = listOf("Афоня", "Ангел", "Аватар"," Богарырь", "Брилиановая рука",
-//            "Экипаж", "Елки", "Гараж","Любовь и голуби", "Москва слезам не верит",
-//            "Служебный роман", "Волга-Волга")
 
         Thread {
             val films = films.getFilmsGanre(14)

@@ -6,14 +6,17 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
+import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.data.MainBroadcastReceiver
 import ru.dudar.findfilms.data.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
+import ru.dudar.findfilms.domain.GanrAdapter
 import ru.dudar.findfilms.domain.MyAdapter
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
@@ -102,6 +105,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
         unregisterReceiver(receiver)
         super.onDestroy()
     }
+
 
 
 }
