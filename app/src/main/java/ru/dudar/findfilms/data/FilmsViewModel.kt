@@ -2,8 +2,11 @@ package ru.dudar.findfilms.data
 
 
 import androidx.lifecycle.ViewModel
+import ru.dudar.findfilms.domain.GanrOb
 import ru.dudar.findfilms.domain.TMDBGenres
 import ru.dudar.findfilms.domain.films.Films
+import java.io.File
+import java.security.AccessController.getContext
 
 class FilmsViewModel : ViewModel() {
     var films_top = mutableListOf<Film>()
@@ -11,13 +14,22 @@ class FilmsViewModel : ViewModel() {
     var filmsJson: Films? = null
     private val films: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     var ganr : List<String> = listOf("14", "35")
+    lateinit var ganrV: List<String>
 
-    init {
+
+    fun getData()
+    {
+//        Thread {
+//            ganrV = File("/GanrView.txt").readLines()
+//        }.start()
+
         Thread {
-            filmsJson = films.getFilmsGanre(ganr[0].toInt())
+            //Thread.sleep(1_000)
+
+            filmsJson = films.getFilmsGanre(GanrOb.ganrOb[0])
             films_top = filmsToList(filmsJson!!)
 
-            filmsJson = films.getFilmsGanre(ganr[1].toInt())
+            filmsJson = films.getFilmsGanre(GanrOb.ganrOb[1])
             films_bottom = filmsToList(filmsJson!!)
 
         }.start()

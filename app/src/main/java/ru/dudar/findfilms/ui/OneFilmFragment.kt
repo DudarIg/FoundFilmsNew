@@ -1,22 +1,30 @@
 package ru.dudar.findfilms.ui
 
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.View
-import by.kirich1409.viewbindingdelegate.viewBinding
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
+import ru.dudar.findfilms.data.Ganr
+import ru.dudar.findfilms.data.RetrofitTMDBGenresImpl
 import ru.dudar.findfilms.databinding.ActivityFilmBinding
-import java.io.File
-import java.io.FileOutputStream
+import ru.dudar.findfilms.domain.GanrAdapter
+import ru.dudar.findfilms.domain.GanrOb
+import ru.dudar.findfilms.domain.TMDBGenres
 
 private const val ARG_PARAM = "param"
 
 class OneFilmFragment : Fragment(R.layout.activity_film) {
+    private val getTheMoviegen: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
+    private var _binding: ActivityFilmBinding? = null
+    private val binding get() = _binding!!
+    private var ganrFilm : String =""
     private var film: Film? = null
-    // Without reflection
-    private val binding by viewBinding(ActivityFilmBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +35,24 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = ActivityFilmBinding.bind(view)
+
+
+        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
+            if (it != null) {
+                it.genres.forEach {
+                    if (it.id == film!!.style.toInt())
+                        ganrFilm = it.name
+                }
+            }
+        }
 
         Glide.with(this)
             .load(film!!.photo)
             .into(binding.filmImageView)
-        //binding.filmImageView.setImageResource(film!!.photo)
         binding.titleTextView.text = film!!.title
         binding.yearTextView.text = film!!.year
-        binding.styleTextView.text = film!!.style
-
-
+        binding.styleTextView.text = ganrFilm
     }
 
     companion object {
@@ -49,5 +65,8 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
             }
     }
 
-
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }

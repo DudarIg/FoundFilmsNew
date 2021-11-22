@@ -5,29 +5,26 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.FilmsViewModel
-import ru.dudar.findfilms.databinding.ActivityFilmBinding
 import ru.dudar.findfilms.databinding.FilmsFragmentBinding
 import ru.dudar.findfilms.domain.MyAdapter
 
 class FilmsFragment : Fragment(R.layout.films_fragment) {
     private lateinit var filmsViewModel: FilmsViewModel
 
-    private val binding by viewBinding(FilmsFragmentBinding::bind)
+    private var _binding: FilmsFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _binding = FilmsFragmentBinding.bind(view)
 
         filmsViewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
+
+        filmsViewModel.getData()
         SystemClock.sleep(5_000)
 
         recyclers_init(view)
@@ -54,5 +51,10 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
 
     companion object {
         fun newInstanse() = FilmsFragment()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

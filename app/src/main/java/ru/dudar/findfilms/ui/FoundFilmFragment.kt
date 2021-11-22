@@ -1,44 +1,34 @@
 package ru.dudar.findfilms.ui
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.data.RetrofitTMDBGenresImpl
-import ru.dudar.findfilms.data.TMDBGenresImpl
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrAdapter
-import ru.dudar.findfilms.domain.MyAdapter
+import ru.dudar.findfilms.domain.GanrOb
 import ru.dudar.findfilms.domain.TMDBGenres
-import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
 import java.io.File
 
 class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
 
-    private val binding by viewBinding(FragmentFoundFilmBinding::bind)
+    private var _binding: FragmentFoundFilmBinding? = null
+    private val binding get() = _binding!!
     private val getTheMoviegen: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     private val sb: MutableList<Ganr> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentFoundFilmBinding.bind(view)
 
-        (activity as AppCompatActivity).supportActionBar?.title =
-            resources.getString(R.string.found_film)
+        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.found_film)
 
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
@@ -49,16 +39,11 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
     }
 
     private fun ganresLoadLiveData() {
-        var ganrView: List<String>
         binding.progressBar.isVisible = true
         getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
             if (it != null) {
-                val path = context?.getFilesDir()
-                val file = File(path, "GanrView.txt")
-                ganrView = file.readLines()
-
-                it.genres.forEach() {
-                    if (it.id == ganrView[0].toInt() || it.id == ganrView[1].toInt())
+                it.genres.forEach {
+                    if (it.id == GanrOb.ganrOb[0] || it.id == GanrOb.ganrOb[1])
                         sb.add(Ganr(it.id, it.name, true))
                     else
                         sb.add(Ganr(it.id, it.name, false))
@@ -114,10 +99,23 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
         val disable = context as Disable
         disable.onDisableButton(true, R.id.found_film)
         (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.cite)
+        var i = 0
+        sb.forEach {
+            if (it.viv && i < 2) {
+                GanrOb.ganrOb[i] = it.id
+                i++
+            }
+        }
     }
+
 
     companion object {
         @JvmStatic
         fun newInstance() = FoundFilmFragment()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
