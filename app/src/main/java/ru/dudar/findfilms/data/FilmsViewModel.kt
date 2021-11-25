@@ -8,13 +8,12 @@ import ru.dudar.findfilms.domain.films.Films
 import java.io.File
 import java.security.AccessController.getContext
 
+
 class FilmsViewModel : ViewModel() {
     var films_top = mutableListOf<Film>()
     var films_bottom = mutableListOf<Film>()
     var filmsJson: Films? = null
     private val films: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
-    var ganr : List<String> = listOf("14", "35")
-    lateinit var ganrV: List<String>
 
 
     fun getData()
@@ -22,6 +21,8 @@ class FilmsViewModel : ViewModel() {
 //        Thread {
 //            ganrV = File("/GanrView.txt").readLines()
 //        }.start()
+
+
 
         Thread {
             //Thread.sleep(1_000)
@@ -40,10 +41,10 @@ class FilmsViewModel : ViewModel() {
         jsonFilms.items.forEach {
             val film = Film()
             film.id = it.id
-            film.photo = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${it.posterPath}"
+            film.photo = "https://image.tmdb.org/t/p/w342/${it.posterPath}"
             film.title = it.title
             film.year = it.releaseDate.substring(0, 4)
-            film.style = jsonFilms.id
+            film.ganr = jsonFilms.id
             filmList.add(film)
 
         }

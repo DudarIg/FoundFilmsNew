@@ -1,6 +1,7 @@
 package ru.dudar.findfilms.domain
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
+
 
 class MyAdapter(private val films: List<Film>):
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
@@ -29,7 +31,7 @@ class MyAdapter(private val films: List<Film>):
                 .load(film.photo)
                 .into(photo)
              //title.text = film.style
-
+            Log.d("@@@@", "${film.ganr}")
 
             itemView.setOnClickListener {
                 val callbacks = holderContext as Callbacks

@@ -21,6 +21,7 @@ private const val ARG_PARAM = "param"
 
 class OneFilmFragment : Fragment(R.layout.activity_film) {
     private val getTheMoviegen: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
+
     private var _binding: ActivityFilmBinding? = null
     private val binding get() = _binding!!
     private var ganrFilm : String =""
@@ -31,6 +32,14 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         arguments?.let {
             film = it.getSerializable(ARG_PARAM) as Film
         }
+        getTheMoviegen.getGenres().observeForever {
+            if (it != null) {
+                it.genres.forEach {
+                    if (it.id == film!!.ganr.toInt())
+                        ganrFilm = it.name
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,14 +47,14 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         _binding = ActivityFilmBinding.bind(view)
 
 
-        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
-            if (it != null) {
-                it.genres.forEach {
-                    if (it.id == film!!.style.toInt())
-                        ganrFilm = it.name
-                }
-            }
-        }
+//        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                it.genres.forEach {
+//                    if (it.id == film!!.style.toInt())
+//                        ganrFilm = it.name
+//                }
+//            }
+//        }
 
         Glide.with(this)
             .load(film!!.photo)

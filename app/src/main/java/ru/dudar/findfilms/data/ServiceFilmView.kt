@@ -13,7 +13,7 @@ class ServiceFilmView : Service() {
         Thread {
             val path = this.getFilesDir()
             val file = File(path, "FilmsView.txt")
-            file.appendText("${data!!.style} ${data!!.title}\n")
+            file.appendText("${data!!.ganr} ${data!!.title}\n")
             stopSelf(startId)
         }.start()
 

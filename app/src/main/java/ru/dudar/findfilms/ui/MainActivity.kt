@@ -1,5 +1,6 @@
 package ru.dudar.findfilms.ui
 
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -17,9 +18,13 @@ import ru.dudar.findfilms.data.MainBroadcastReceiver
 import ru.dudar.findfilms.data.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrAdapter
+import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
 import java.io.File
 import java.security.AccessController
+
+private const val GANR1 = "ganr1"
+private const val GANR2 = "ganr2"
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
 
@@ -32,6 +37,9 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ganrOb[0] = getPreferences(MODE_PRIVATE).getInt(GANR1, 14)
+        ganrOb[1] = getPreferences(MODE_PRIVATE).getInt(GANR2, 35)
 
         registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         initToolbar()
@@ -103,8 +111,21 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
 
     }
 
+    override fun onStop() {
+        val sharedPref = getPreferences(MODE_PRIVATE)
+        sharedPref.edit().let{
+            it.putInt(GANR1, ganrOb[0])
+            it.putInt(GANR2, ganrOb[1])
+            it.commit()
+        }
+
+        super.onStop()
+    }
+
     override fun onDestroy() {
         unregisterReceiver(receiver)
+
+
         super.onDestroy()
     }
 

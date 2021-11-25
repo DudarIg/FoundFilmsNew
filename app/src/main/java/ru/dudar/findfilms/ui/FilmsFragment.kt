@@ -1,15 +1,18 @@
 package ru.dudar.findfilms.ui
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.FilmsViewModel
 import ru.dudar.findfilms.databinding.FilmsFragmentBinding
+import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
 
 class FilmsFragment : Fragment(R.layout.films_fragment) {
@@ -23,7 +26,6 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
         _binding = FilmsFragmentBinding.bind(view)
 
         filmsViewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
-
         filmsViewModel.getData()
         SystemClock.sleep(5_000)
 

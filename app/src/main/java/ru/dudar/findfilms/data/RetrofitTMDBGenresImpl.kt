@@ -35,7 +35,7 @@ class RetrofitTMDBGenresImpl : TMDBGenres {
                 call: Call<TheMovieGenres?>,
                 response: Response<TheMovieGenres?>
             ) {
-                liveData.value = response.body()
+                liveData.postValue(response.body())
             }
 
             override fun onFailure(call: Call<TheMovieGenres?>, t: Throwable) {
