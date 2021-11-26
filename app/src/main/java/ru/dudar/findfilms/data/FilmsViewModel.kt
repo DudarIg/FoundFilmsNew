@@ -41,7 +41,7 @@ class FilmsViewModel : ViewModel() {
         jsonFilms.items.forEach {
             val film = Film()
             film.id = it.id
-            film.photo = "https://image.tmdb.org/t/p/w342/${it.posterPath}"
+            film.photo = "https://image.tmdb.org/t/p/w342${it.posterPath}"
             film.title = it.title
             film.year = it.releaseDate.substring(0, 4)
             film.ganr = jsonFilms.id

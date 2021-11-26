@@ -16,6 +16,7 @@ import ru.dudar.findfilms.databinding.ActivityFilmBinding
 import ru.dudar.findfilms.domain.GanrAdapter
 import ru.dudar.findfilms.domain.GanrOb
 import ru.dudar.findfilms.domain.TMDBGenres
+import kotlinx.coroutines.*
 
 private const val ARG_PARAM = "param"
 
@@ -32,29 +33,15 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         arguments?.let {
             film = it.getSerializable(ARG_PARAM) as Film
         }
-        getTheMoviegen.getGenres().observeForever {
-            if (it != null) {
-                it.genres.forEach {
-                    if (it.id == film!!.ganr.toInt())
-                        ganrFilm = it.name
-                }
-            }
-        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = ActivityFilmBinding.bind(view)
 
-
-//        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                it.genres.forEach {
-//                    if (it.id == film!!.style.toInt())
-//                        ganrFilm = it.name
-//                }
-//            }
-//        }
+        ganrFilm()
+        SystemClock.sleep(700)
 
         Glide.with(this)
             .load(film!!.photo)
@@ -62,6 +49,12 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         binding.titleTextView.text = film!!.title
         binding.yearTextView.text = film!!.year
         binding.styleTextView.text = ganrFilm
+    }
+
+    fun bbb() = runBlocking {
+        val job = launch {ganrFilm()}
+        //SystemClock.sleep(1)
+        job.join()
     }
 
     companion object {
@@ -78,4 +71,22 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         _binding = null
         super.onDestroyView()
     }
+
+    private fun ganrFilm() {
+        Thread {
+            val resJson = getTheMoviegen.getTMDBGenresSync()
+            if (resJson != null) {
+                resJson.genres.forEach {
+                    if (it.id == film!!.ganr.toInt())
+                        ganrFilm = it.name
+                    }
+            }
+            else {
+                activity?.runOnUiThread {
+                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }.start()
+    }
+
 }
