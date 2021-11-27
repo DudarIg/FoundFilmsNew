@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    //id 'kotlin-kapt'
+    id 'kotlin-kapt'
 }
 
 
@@ -50,6 +50,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-core:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
+    implementation 'androidx.room:room-runtime:2.4.0-beta02'
+    kapt 'androidx.room:room-compiler:2.4.0-beta02'
 
     implementation "io.coil-kt:coil:0.11.0"
     implementation 'com.github.bumptech.glide:glide:4.12.0'

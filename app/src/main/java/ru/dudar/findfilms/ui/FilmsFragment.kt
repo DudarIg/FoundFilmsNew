@@ -31,16 +31,16 @@ class FilmsFragment : Fragment(R.layout.films_fragment) {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerBottom?.adapter = myAdapter1
 
-        recyclers_init(GanrOb.ganrOb[0], GanrOb.ganrOb[1])
+        recyclers_init()
     }
 
-    private fun recyclers_init(data0: Int, data1: Int) {
-        ApiBookImpl().filmsGange(data0).observe(this,
+    private fun recyclers_init() {
+        ApiBookImpl().filmsGange(GanrOb.ganrOb[0]).observe(this,
             Observer {
                 it ?: return@Observer
                 myAdapter0.updateAdapter(it)
             })
-        ApiBookImpl().filmsGange(data1).observe(this, Observer {
+        ApiBookImpl().filmsGange(GanrOb.ganrOb[1]).observe(this, Observer {
             it ?: return@Observer
             myAdapter1.updateAdapter(it)
         })
