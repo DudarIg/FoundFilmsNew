@@ -12,6 +12,6 @@ data class Film  (
     var photo: String = "",
     var title: String = "",
     var year: String = "",
-    var ganr: String = ""
+    var ganr: Int = 0
 
 ): Serializable

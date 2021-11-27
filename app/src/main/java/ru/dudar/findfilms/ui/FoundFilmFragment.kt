@@ -5,87 +5,55 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import ru.dudar.findfilms.R
+import ru.dudar.findfilms.apiBook.GanresViewModel
 import ru.dudar.findfilms.data.Ganr
-import ru.dudar.findfilms.data.RetrofitTMDBGenresImpl
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrAdapter
 import ru.dudar.findfilms.domain.GanrOb
-import ru.dudar.findfilms.domain.TMDBGenres
-import java.io.File
+
 
 class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
 
     private var _binding: FragmentFoundFilmBinding? = null
     private val binding get() = _binding!!
-    private val getTheMoviegen: TMDBGenres by lazy { RetrofitTMDBGenresImpl() }
     private val sb: MutableList<Ganr> = mutableListOf()
+    private val ganrViewModel by viewModels<GanresViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoundFilmBinding.bind(view)
 
-        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.found_film)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            resources.getString(R.string.found_film)
 
         val disable = context as Disable
         disable.onDisableButton(false, R.id.found_film)
 
-               ganresLoadSync()
-       // ganresLoadLiveData()
+        ganresLoadSync()
 
-    }
-
-    private fun ganresLoadLiveData() {
-        binding.progressBar.isVisible = true
-        getTheMoviegen.getGenres().observe(viewLifecycleOwner) {
-            if (it != null) {
-                it.genres.forEach {
-                    if (it.id == GanrOb.ganrOb[0] || it.id == GanrOb.ganrOb[1])
-                        sb.add(Ganr(it.id, it.name, true))
-                    else
-                        sb.add(Ganr(it.id, it.name, false))
-                }
-                binding.progressBar.isVisible = false
-                binding.recyclerGanr.layoutManager = LinearLayoutManager(context)
-                binding.recyclerGanr.adapter = GanrAdapter(sb)
-            } else {
-                binding.progressBar.isVisible = false
-                Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
-            }
-        }
     }
 
     private fun ganresLoadSync() {
 
         binding.progressBar.isVisible = true
-        Thread {
-            val resJson = getTheMoviegen.getTMDBGenresSync()
-                if (resJson != null) {
-                resJson.genres.forEach {
-                    if (it.id == GanrOb.ganrOb[0] || it.id == GanrOb.ganrOb[1])
-                        sb.add(Ganr(it.id, it.name, true))
-                    else
-                        sb.add(Ganr(it.id, it.name, false))
-                }
 
-                activity?.runOnUiThread {
-                    binding.progressBar.isVisible = false
-
-                }
-
-            } else {
-                activity?.runOnUiThread {
-                    binding.progressBar.isVisible = false
-                    Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_SHORT).show()
-                }
+        ganrViewModel.listGanresVM.observe(viewLifecycleOwner, Observer {
+            it.forEach {
+                if (it.id == GanrOb.ganrOb[0] || it.id == GanrOb.ganrOb[1])
+                    sb.add(Ganr(it.id, it.name, true))
+                else
+                    sb.add(Ganr(it.id, it.name, false))
             }
-        }.start()
-
-        binding.recyclerGanr.layoutManager = LinearLayoutManager(context)
-        binding.recyclerGanr.adapter = GanrAdapter(sb)
+            binding.progressBar.isVisible = false
+            binding.recyclerGanr.layoutManager = LinearLayoutManager(context)
+            binding.recyclerGanr.adapter = GanrAdapter(sb)
+        }
+        )
     }
 
     override fun onStop() {
@@ -101,7 +69,6 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
             }
         }
     }
-
 
     companion object {
         @JvmStatic

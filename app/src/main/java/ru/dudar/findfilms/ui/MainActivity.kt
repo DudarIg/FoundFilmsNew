@@ -25,6 +25,7 @@ import java.security.AccessController
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
+var idGenres = 0
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
 

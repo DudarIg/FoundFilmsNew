@@ -13,7 +13,7 @@ import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
 
 
-class MyAdapter(private val films: List<Film>):
+class MyAdapter(private val films: MutableList<Film>):
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
     class MyHolder(itemView: View, val holderContext : Context):
@@ -31,7 +31,7 @@ class MyAdapter(private val films: List<Film>):
                 .load(film.photo)
                 .into(photo)
              //title.text = film.style
-            Log.d("@@@@", "${film.ganr}")
+           // Log.d("@@@@", "${film.ganr}")
 
             itemView.setOnClickListener {
                 val callbacks = holderContext as Callbacks
@@ -53,6 +53,12 @@ class MyAdapter(private val films: List<Film>):
 
     override fun getItemCount(): Int {
         return films.size
+    }
+    // обновление адаптера
+    fun updateAdapter(listItems: List<Film>){
+        films.clear()
+        films.addAll(listItems)
+        notifyDataSetChanged()
     }
 
 
