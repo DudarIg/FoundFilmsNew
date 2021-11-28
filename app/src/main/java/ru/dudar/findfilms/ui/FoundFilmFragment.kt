@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar.findfilms.R
-import ru.dudar.findfilms.apiBook.GanresViewModel
+import ru.dudar.findfilms.apiTheMovies.GanresViewModel
 import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
 import ru.dudar.findfilms.domain.Disable

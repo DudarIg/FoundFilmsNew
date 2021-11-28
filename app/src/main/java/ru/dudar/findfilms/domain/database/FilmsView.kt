@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.db
+package ru.dudar.findfilms.domain.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

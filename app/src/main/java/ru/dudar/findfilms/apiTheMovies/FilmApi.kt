@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.apiBook
+package ru.dudar.findfilms.apiTheMovies
 
 
 import retrofit2.Call

@@ -1,10 +1,8 @@
-package ru.dudar.findfilms.apiBook
+package ru.dudar.findfilms.apiTheMovies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
-import ru.dudar.findfilms.domain.GanrOb
 
 
 class GanresViewModel: ViewModel() {
