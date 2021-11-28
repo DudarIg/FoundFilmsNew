@@ -11,17 +11,19 @@ import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.databinding.ActivityFilmBinding
 import ru.dudar.findfilms.apiTheMovies.GanresViewModel
+import ru.dudar.findfilms.apiTheMovies.MainFilmsViewModel
+import ru.dudar.findfilms.apiTheMovies.OneFilmViewModel
+import ru.dudar.findfilms.domain.GanrOb
+import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
 
 private const val ARG_PARAM = "param"
 
 class OneFilmFragment : Fragment(R.layout.activity_film) {
 
     private val ganrViewModel by viewModels<GanresViewModel>()
-
+    private val oneFilmViewModel by viewModels<OneFilmViewModel>()
     private var _binding: ActivityFilmBinding? = null
     private val binding get() = _binding!!
-    private var ganrFilm: String = ""
-    private var ganry: ArrayList<Ganr> = arrayListOf()
     private var film: Film? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +38,12 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         _binding = ActivityFilmBinding.bind(view)
 
         infoFilms()
+
+        binding.addFilmsButton.setOnClickListener {
+            val filmsDbRepo = FilmsDbRepo.get()
+            filmsDbRepo.addFilm(film!!)
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     companion object {
@@ -59,7 +67,6 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
             .into(binding.filmImageView)
         binding.titleTextView.text = film!!.title
         binding.yearTextView.text = film!!.year
-
         ganrViewModel.listGanresVM.observe(viewLifecycleOwner, Observer {
             it.forEach { ganr ->
                 if (film!!.ganr == ganr.id) {
@@ -67,6 +74,13 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
                 }
             }
         })
-    }
 
+        GanrOb.ganrOb[3] = film!!.id
+        oneFilmViewModel.oneMainFilm.observe(this, Observer {
+            if (it == null)
+                binding.addFilmsButton.isEnabled = true
+            else
+                binding.addFilmsButton.isEnabled = false
+        })
+    }
 }

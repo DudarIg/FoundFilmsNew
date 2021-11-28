@@ -105,6 +105,11 @@
             tools:text="@string/tools"
             android:layout_marginStart="@dimen/margin"/>
     </LinearLayout>
+        <Button
+            android:id="@+id/add_films_button"
+            android:text="@string/is_views"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
     </LinearLayout>
 

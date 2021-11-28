@@ -36,6 +36,16 @@ class MainFilmsViewModel: ViewModel() {
     }
 }
 
+class OneFilmViewModel: ViewModel() {
+    private val filmsDbRepo: FilmsDbRepo
+    var oneMainFilm: LiveData<Film?>
+    init {
+        filmsDbRepo = FilmsDbRepo.get()
+        oneMainFilm = filmsDbRepo.getFilm(GanrOb.ganrOb[3])
+    }
+}
+
+
 
 
 

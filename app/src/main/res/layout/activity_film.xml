@@ -59,6 +59,13 @@
             android:id="@+id/year_textView"
             tools:text="@string/tools"
             android:layout_marginStart="@dimen/margin"/>
+
+        <Button
+            android:id="@+id/add_films_button"
+            android:layout_marginStart="@dimen/text16sp"
+            android:text="@string/is_views"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
      <LinearLayout
         android:layout_marginTop="@dimen/text_title"

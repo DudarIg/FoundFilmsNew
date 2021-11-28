@@ -23,6 +23,10 @@ class MyAdapter(private val films: MutableList<Film>, val dan: Int):
             fun onFilmSelect(film:Film)
         }
 
+        interface CallbacksDelete {
+            fun onDeleteFilm(film:Film)
+        }
+
 
 
         fun setData(film: Film) {
@@ -50,8 +54,9 @@ class MyAdapter(private val films: MutableList<Film>, val dan: Int):
             // Log.d("@@@@", "${film.ganr}")
 
             itemView.setOnClickListener {
-                val callbacks = holderContext as Callbacks
-                callbacks.onFilmSelect(film)
+                val callbacksDelete = holderContext as CallbacksDelete
+                callbacksDelete.onDeleteFilm(film)
+
             }
         }
 

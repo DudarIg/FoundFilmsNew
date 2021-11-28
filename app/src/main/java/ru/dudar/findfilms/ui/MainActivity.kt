@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,12 +17,14 @@ import ru.dudar.findfilms.data.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
+import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
 var idGenres = 0
 
-class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable {
+class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
+MyAdapter.MyHolder.CallbacksDelete {
 
     private val receiver = MainBroadcastReceiver()
 
@@ -53,7 +56,6 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     override fun onFilmSelect(film: Film) {
         startService(Intent(this,
                        ServiceFilmView::class.java).putExtra("film", film) )
-
         val fragment = OneFilmFragment.newInstance(film)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -69,7 +71,6 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     private fun initToolbar() {
         toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
     }
 
     private fun initBottomMenu() {
@@ -102,8 +103,6 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
     override fun onDisableButton(bool: Boolean, idMenu: Int) {
         var menuItem = bottomMenuView!!.menu.findItem(idMenu)
         menuItem.isVisible = bool
-
-
     }
 
     override fun onStop() {
@@ -119,9 +118,27 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
 
     override fun onDestroy() {
         unregisterReceiver(receiver)
-
-
         super.onDestroy()
+    }
+
+    override fun onDeleteFilm(film: Film) {
+        val builder = AlertDialog.Builder(this)
+        builder.apply {
+            setTitle("Удаление")
+            setMessage("Удалить фильм?")
+            setIcon(R.drawable.ic_priority)
+            setPositiveButton(
+                "Да") { dialog, id ->
+                val filmsDbRepo = FilmsDbRepo.get()
+                filmsDbRepo.deleteFilm(film)  }
+            setNegativeButton(
+                "Cancel") { dialog, id ->
+            }
+        }.show()
+
+
+
+
     }
 
 }
