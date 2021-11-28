@@ -9,11 +9,11 @@ import ru.dudar.findfilms.data.Film
 
 @Dao
 interface FilmsDao {
-    @Query("SELECT * FROM films")
+    @Query("SELECT * FROM filmsviews")
     fun getFilms(): LiveData<List<Film>>
 
-    @Query("SELECT * FROM films WHERE id=(:id)")
-    fun getFilm(id: Int): Film?
+    @Query("SELECT * FROM filmsviews WHERE id=(:id)")
+    fun getFilm(id: Int): LiveData<Film?>
 
     @Insert
     fun addFilm(film: Film)

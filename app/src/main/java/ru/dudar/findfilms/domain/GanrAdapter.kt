@@ -16,7 +16,7 @@ class GanrAdapter(private val ganrs: List<Ganr>):
     class MyHolder(itemView: View, val hContext : Context):
         RecyclerView.ViewHolder(itemView) {
 
-        val id: TextView = itemView.findViewById(R.id.id_text_view)
+        val id: TextView = itemView.findViewById(R.id.title_text_view)
         val name : TextView = itemView.findViewById(R.id.name_text_view)
         val viv : CheckBox = itemView.findViewById(R.id.viv_checkBox)
 

@@ -58,6 +58,7 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
 
     override fun onStop() {
         super.onStop()
+
         val disable = context as Disable
         disable.onDisableButton(true, R.id.found_film)
         (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.cite)

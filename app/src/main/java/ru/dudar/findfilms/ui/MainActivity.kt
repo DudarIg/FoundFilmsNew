@@ -1,27 +1,21 @@
 package ru.dudar.findfilms.ui
 
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
-import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.data.MainBroadcastReceiver
 import ru.dudar.findfilms.data.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
-import ru.dudar.findfilms.domain.GanrAdapter
 import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
-import java.io.File
-import java.security.AccessController
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
@@ -84,7 +78,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
             val fragment: Fragment
             when (item.itemId) {
                 R.id.as_programm -> {
-                    fragment = ProgrammFragment.newInstance()
+                    fragment = MainFilmsFragment.newInstance()
                 }
                 R.id.found_film -> {
 
@@ -94,7 +88,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable 
                     fragment = SettingsFragment.newInstance()
                 }
                 else -> {
-                    fragment = ProgrammFragment.newInstance()
+                    fragment = MainFilmsFragment.newInstance()
                 }
             }
             supportFragmentManager.beginTransaction()

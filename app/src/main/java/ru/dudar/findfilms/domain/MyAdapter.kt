@@ -13,7 +13,7 @@ import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
 
 
-class MyAdapter(private val films: MutableList<Film>):
+class MyAdapter(private val films: MutableList<Film>, val dan: Int):
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
     class MyHolder(itemView: View, val holderContext : Context):
@@ -23,10 +23,10 @@ class MyAdapter(private val films: MutableList<Film>):
             fun onFilmSelect(film:Film)
         }
 
-        val photo: ImageView = itemView.findViewById(R.id.photo_imageview)
-        //val title : TextView = itemView.findViewById(R.id.title_textview)
+
 
         fun setData(film: Film) {
+            val photo: ImageView = itemView.findViewById(R.id.photo_imageview)
             Glide.with(holderContext)
                 .load(film.photo)
                 .into(photo)
@@ -38,17 +38,42 @@ class MyAdapter(private val films: MutableList<Film>):
                 callbacks.onFilmSelect(film)
             }
          }
+
+        fun setDataMainFilm(film: Film) {
+            val title : TextView = itemView.findViewById(R.id.title_text_view)
+            val year : TextView = itemView.findViewById(R.id.ganr_text_view)
+//            Glide.with(holderContext)
+//                .load(film.photo)
+//                .into(photo)
+            title.text = film.title
+            year.text = film.year
+            // Log.d("@@@@", "${film.ganr}")
+
+            itemView.setOnClickListener {
+                val callbacks = holderContext as Callbacks
+                callbacks.onFilmSelect(film)
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
-        return MyHolder(
-            LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_item, parent, false), parent.context)
+        if (dan == 1)
+                return MyHolder(
+                    LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recycler_item, parent, false), parent.context)
+        else
+            return MyHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recycler_main_film, parent, false), parent.context)
     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val film = films[position]
-        holder.setData(film)
+        if (dan == 1) {
+            holder.setData(film) }
+        if (dan ==2) {
+            holder.setDataMainFilm(film)  }
     }
 
     override fun getItemCount(): Int {

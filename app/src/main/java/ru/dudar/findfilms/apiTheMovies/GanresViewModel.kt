@@ -2,35 +2,39 @@ package ru.dudar.findfilms.apiTheMovies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.internal.ContextUtils.getActivity
+import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
+import ru.dudar.findfilms.domain.GanrOb
+import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
 
 
 class GanresViewModel: ViewModel() {
 
     val listGanresVM: LiveData<List<Ganr>>
-
     init {
         listGanresVM = ApiBookImpl().listGanres()
     }
 }
 
-//class FilmsViewModelTop: ViewModel() {
-//    var listFilmsVM: LiveData<List<Film>>
-//
-//    init {
-//        val ganre = GanrOb.ganrOb[0]
-//        listFilmsVM = ApiBookImpl().filmsGange(ganre)
-//    }
-//}
-//class FilmsViewModelBottom: ViewModel() {
-//    var listFilmsVM: LiveData<List<Film>>
-//
-//    init {
-//        val ganre = GanrOb.ganrOb[1]
-//        listFilmsVM = ApiBookImpl().filmsGange(ganre)
-//    }
-//}
+class FilmsViewModel: ViewModel() {
 
+    var listFilmsTop: LiveData<List<Film>>?
+    var listFilmsBottom: LiveData<List<Film>>?
+    init {
+        listFilmsTop = ApiBookImpl().filmsGange(GanrOb.ganrOb[0])
+        listFilmsBottom = ApiBookImpl().filmsGange(GanrOb.ganrOb[1])
+    }
+}
+
+class MainFilmsViewModel: ViewModel() {
+    private val filmsDbRepo: FilmsDbRepo
+    var listMainFilms: LiveData<List<Film>>
+    init {
+        filmsDbRepo = FilmsDbRepo.get()
+        listMainFilms = filmsDbRepo.getFilms()
+    }
+}
 
 
 
