@@ -24,6 +24,8 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
     private val binding get() = _binding!!
     private var film: Film? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,7 +42,8 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         binding.addFilmsButton.setOnClickListener {
             val filmsDbRepo = FilmsDbRepo.get()
             filmsDbRepo.addFilm(film!!)
-            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().onBackPressed()
+
         }
     }
 

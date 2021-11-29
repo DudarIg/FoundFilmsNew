@@ -49,11 +49,13 @@ class MainFilmsFragment : Fragment(R.layout.fragment_main_film) {
         val disable = context as Disable
         disable.onDisableButton(true, R.id.as_programm)
         (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.cite)
+
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+
     }
 
 

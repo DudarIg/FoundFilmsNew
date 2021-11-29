@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
+
             .commit()
     }
 
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
     private fun initToolbar() {
         toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
     }
 
     private fun initBottomMenu() {
@@ -81,6 +83,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
             val fragment: Fragment
             when (item.itemId) {
                 R.id.as_programm -> {
+                    supportFragmentManager.popBackStack()
                     fragment = MainFilmsFragment.newInstance()
                 }
                 R.id.found_film -> {
@@ -94,6 +97,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
                     fragment = MainFilmsFragment.newInstance()
                 }
             }
+            supportFragmentManager.popBackStack()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
