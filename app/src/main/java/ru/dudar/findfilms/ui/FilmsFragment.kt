@@ -5,16 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.internal.ContextUtils
 import ru.dudar.findfilms.R
-import ru.dudar.findfilms.apiTheMovies.ApiBookImpl
-import ru.dudar.findfilms.apiTheMovies.FilmsViewModel
-import ru.dudar.findfilms.apiTheMovies.GanresViewModel
+import ru.dudar.findfilms.data.apiTheMovies.FilmsViewModel
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.databinding.FilmsFragmentBinding
-import ru.dudar.findfilms.domain.GanrOb
 import ru.dudar.findfilms.domain.MyAdapter
 
 

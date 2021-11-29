@@ -1,7 +1,6 @@
 package ru.dudar.findfilms.domain
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,16 +26,11 @@ class MyAdapter(private val films: MutableList<Film>, val dan: Int):
             fun onDeleteFilm(film:Film)
         }
 
-
-
         fun setData(film: Film) {
             val photo: ImageView = itemView.findViewById(R.id.photo_imageview)
             Glide.with(holderContext)
                 .load(film.photo)
                 .into(photo)
-             //title.text = film.style
-           // Log.d("@@@@", "${film.ganr}")
-
             itemView.setOnClickListener {
                 val callbacks = holderContext as Callbacks
                 callbacks.onFilmSelect(film)
@@ -46,9 +40,6 @@ class MyAdapter(private val films: MutableList<Film>, val dan: Int):
         fun setDataMainFilm(film: Film) {
             val title : TextView = itemView.findViewById(R.id.title_text_view)
             val year : TextView = itemView.findViewById(R.id.ganr_text_view)
-//            Glide.with(holderContext)
-//                .load(film.photo)
-//                .into(photo)
             title.text = film.title
             year.text = film.year
             // Log.d("@@@@", "${film.ganr}")

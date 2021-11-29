@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.data
+package ru.dudar.findfilms.domain
 
 import android.content.BroadcastReceiver
 import android.content.Context

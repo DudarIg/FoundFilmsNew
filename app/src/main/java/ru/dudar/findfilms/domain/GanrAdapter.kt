@@ -33,7 +33,6 @@ class GanrAdapter(private val ganrs: List<Ganr>):
                     else {
                     viv.isChecked = true
                     ganr.viv = true}
-
             }
         }
     }
@@ -52,6 +51,4 @@ class GanrAdapter(private val ganrs: List<Ganr>):
     override fun getItemCount(): Int {
         return ganrs.size
     }
-
-
 }

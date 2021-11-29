@@ -8,13 +8,11 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
-import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.databinding.ActivityFilmBinding
-import ru.dudar.findfilms.apiTheMovies.GanresViewModel
-import ru.dudar.findfilms.apiTheMovies.MainFilmsViewModel
-import ru.dudar.findfilms.apiTheMovies.OneFilmViewModel
+import ru.dudar.findfilms.data.apiTheMovies.GanresViewModel
+import ru.dudar.findfilms.data.apiTheMovies.OneFilmViewModel
 import ru.dudar.findfilms.domain.GanrOb
-import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
+import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
 
 private const val ARG_PARAM = "param"
 

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoundFilms">
         <service
-            android:name=".data.ServiceFilmView"
+            android:name=".domain.ServiceFilmView"
             android:enabled="true"
             android:exported="true"/>
         <activity

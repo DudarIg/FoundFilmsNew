@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.domain.database
+package ru.dudar.findfilms.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -8,12 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar.findfilms.R
-import ru.dudar.findfilms.apiTheMovies.MainFilmsViewModel
+import ru.dudar.findfilms.data.apiTheMovies.MainFilmsViewModel
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.databinding.FragmentMainFilmBinding
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.MyAdapter
-import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
 
 class MainFilmsFragment : Fragment(R.layout.fragment_main_film) {
 

@@ -1,12 +1,11 @@
-package ru.dudar.findfilms.apiTheMovies
+package ru.dudar.findfilms.data.apiTheMovies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.internal.ContextUtils.getActivity
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.domain.GanrOb
-import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
+import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
 
 
 class GanresViewModel: ViewModel() {
