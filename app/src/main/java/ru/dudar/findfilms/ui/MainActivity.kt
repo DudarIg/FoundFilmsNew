@@ -21,13 +21,11 @@ import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
-var idGenres = 0
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
-MyAdapter.MyHolder.CallbacksDelete {
+    MyAdapter.MyHolder.CallbacksDelete {
 
     private val receiver = MainBroadcastReceiver()
-
 
     lateinit var toolbar: Toolbar
     private var bottomMenuView: BottomNavigationView? = null
@@ -54,8 +52,12 @@ MyAdapter.MyHolder.CallbacksDelete {
     }
 
     override fun onFilmSelect(film: Film) {
-        startService(Intent(this,
-                       ServiceFilmView::class.java).putExtra("film", film) )
+        startService(
+            Intent(
+                this,
+                ServiceFilmView::class.java
+            ).putExtra("film", film)
+        )
         val fragment = OneFilmFragment.newInstance(film)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -107,7 +109,7 @@ MyAdapter.MyHolder.CallbacksDelete {
 
     override fun onStop() {
         val sharedPref = getPreferences(MODE_PRIVATE)
-        sharedPref.edit().let{
+        sharedPref.edit().let {
             it.putInt(GANR1, ganrOb[0])
             it.putInt(GANR2, ganrOb[1])
             it.commit()
@@ -128,17 +130,15 @@ MyAdapter.MyHolder.CallbacksDelete {
             setMessage("Удалить фильм?")
             setIcon(R.drawable.ic_priority)
             setPositiveButton(
-                "Да") { dialog, id ->
+                "Да"
+            ) { dialog, id ->
                 val filmsDbRepo = FilmsDbRepo.get()
-                filmsDbRepo.deleteFilm(film)  }
+                filmsDbRepo.deleteFilm(film)
+            }
             setNegativeButton(
-                "Cancel") { dialog, id ->
+                "Cancel"
+            ) { dialog, id ->
             }
         }.show()
-
-
-
-
     }
-
 }

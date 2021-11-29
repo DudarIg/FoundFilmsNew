@@ -75,7 +75,7 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
             }
         })
 
-        GanrOb.ganrOb[3] = film!!.id
+        GanrOb.ganrOb[2] = film!!.id
         oneFilmViewModel.oneMainFilm.observe(this, Observer {
             if (it == null)
                 binding.addFilmsButton.isEnabled = true

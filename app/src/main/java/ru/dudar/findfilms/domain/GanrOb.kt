@@ -1,5 +1,5 @@
 package ru.dudar.findfilms.domain
 
 object GanrOb {
-    var ganrOb = mutableListOf(14, 35, 0, 0)
+    var ganrOb = mutableListOf(14, 35, 0)
 }

@@ -41,7 +41,7 @@ class OneFilmViewModel: ViewModel() {
     var oneMainFilm: LiveData<Film?>
     init {
         filmsDbRepo = FilmsDbRepo.get()
-        oneMainFilm = filmsDbRepo.getFilm(GanrOb.ganrOb[3])
+        oneMainFilm = filmsDbRepo.getFilm(GanrOb.ganrOb[2])
     }
 }
 
