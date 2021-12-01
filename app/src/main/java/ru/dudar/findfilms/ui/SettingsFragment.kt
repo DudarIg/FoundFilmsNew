@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.databinding.FragmentSettingsBinding
 import ru.dudar.findfilms.domain.Disable
+import android.content.Intent
+import android.provider.Settings
 
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -25,6 +27,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.zeroTextView.isVisible = false
         binding.explainTextView.isVisible = false
         binding.allowedTextView.isVisible = false
+        binding.locateButton.isVisible = false
         val explain = shouldShowRequestPermissionRationale("android.permission.ACCESS_COARSE_LOCATION")
         val permisResultCoarse = checkSelfPermission(requireContext(),
             "android.permission.ACCESS_COARSE_LOCATION")
@@ -36,6 +39,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             binding.zeroTextView.isVisible = true
             if (explain)
                 binding.explainTextView.isVisible = true
+
+            binding.locateButton.isVisible = true
+            binding.locateButton.setOnClickListener{
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
         } else {
             explain()
         }
