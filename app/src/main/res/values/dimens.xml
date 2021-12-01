@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_title">16dp</dimen>
+    <dimen name="text_title">16sp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="margin4">4dp</dimen>
     <dimen name="margin8">8dp</dimen>
-    <dimen name="text">14dp</dimen>
+    <dimen name="text">14sp</dimen>
     <dimen name="text16sp">16sp</dimen>
     <dimen name="sp14">14sp</dimen>
 </resources>

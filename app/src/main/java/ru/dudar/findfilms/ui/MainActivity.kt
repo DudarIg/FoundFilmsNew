@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dudar.findfilms.R
@@ -21,6 +22,7 @@ import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
+private const val LOCATION = 1212
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
     MyAdapter.MyHolder.CallbacksDelete {
@@ -49,6 +51,12 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
+
+        ActivityCompat.requestPermissions(this, arrayOf(
+            "android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION"), LOCATION)
+
+
     }
 
     override fun onFilmSelect(film: Film) {
@@ -145,4 +153,5 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
             }
         }.show()
     }
+
 }

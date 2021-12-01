@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_find"/>
     <item
         android:id="@+id/as_settings"
-        android:title="@string/settings"
-        android:icon="@drawable/ic_settings"/>
+        android:title="@string/locate"
+        android:icon="@drawable/ic_baseline_location_on_24"/>
 
 </menu>

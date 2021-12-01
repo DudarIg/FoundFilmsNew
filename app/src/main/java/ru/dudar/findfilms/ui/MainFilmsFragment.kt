@@ -32,9 +32,14 @@ class MainFilmsFragment : Fragment(R.layout.fragment_main_film) {
         binding.recyclerMainFilm.layoutManager = LinearLayoutManager(context)
         binding.recyclerMainFilm.adapter = myAdapter
 
-        mainFilmsViewModel.listMainFilms.observe(this, Observer {
-            it ?: return@Observer
-            myAdapter.updateAdapter(it)
+        mainFilmsViewModel.listMainFilms.observe(this, Observer {films ->
+            films ?: return@Observer
+            myAdapter.updateAdapter(films)
+            if (films.size > 0) {
+                binding.zeroFilms.visibility = View.GONE
+            } else {
+                binding.zeroFilms.visibility = View.VISIBLE
+            }
         })
 
     }

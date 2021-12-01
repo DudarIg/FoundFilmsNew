@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
@@ -19,7 +20,8 @@ private const val ARG_PARAM = "param"
 class OneFilmFragment : Fragment(R.layout.activity_film) {
 
     private val ganrViewModel by viewModels<GanresViewModel>()
-    private val oneFilmViewModel by viewModels<OneFilmViewModel>()
+    //private val oneFilmViewModel by viewModels<OneFilmViewModel>()
+    private lateinit var oneFilmViewModel: OneFilmViewModel
     private var _binding: ActivityFilmBinding? = null
     private val binding get() = _binding!!
     private var film: Film? = null
@@ -31,6 +33,7 @@ class OneFilmFragment : Fragment(R.layout.activity_film) {
         arguments?.let {
             film = it.getSerializable(ARG_PARAM) as Film
         }
+        oneFilmViewModel = ViewModelProvider(this).get(OneFilmViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
