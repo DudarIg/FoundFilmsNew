@@ -37,16 +37,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             if (explain)
                 binding.explainTextView.isVisible = true
         } else {
-
-            binding.allowedTextView.isVisible = true
+            explain()
         }
-
-
-
-
 
     }
 
+    fun explain() {
+        binding.allowedTextView.isVisible = true
+    }
 
     override fun onStop() {
         super.onStop()

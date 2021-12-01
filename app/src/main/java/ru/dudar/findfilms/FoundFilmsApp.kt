@@ -1,7 +1,7 @@
 package ru.dudar.findfilms
 
 import android.app.Application
-import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
+import ru.dudar.findfilms.data.database.FilmsDbRepo
 
 class FoundFilmsApp: Application() {
     override fun onCreate() {

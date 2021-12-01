@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
+import ru.dudar.findfilms.data.database.FilmsDbRepo
 import ru.dudar.findfilms.domain.MainBroadcastReceiver
 import ru.dudar.findfilms.domain.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
-import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"

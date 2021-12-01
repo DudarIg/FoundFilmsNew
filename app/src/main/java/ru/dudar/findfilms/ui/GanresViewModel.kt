@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
+import ru.dudar.findfilms.data.database.FilmsDbRepo
 import ru.dudar.findfilms.domain.GanrOb
-import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
+
 
 
 class GanresViewModel: ViewModel() {

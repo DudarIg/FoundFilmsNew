@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.data.repoDataBase
+package ru.dudar.findfilms.data.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData

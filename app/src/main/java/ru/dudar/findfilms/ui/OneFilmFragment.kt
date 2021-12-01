@@ -12,8 +12,8 @@ import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.databinding.ActivityFilmBinding
 import ru.dudar.findfilms.data.apiTheMovies.GanresViewModel
 import ru.dudar.findfilms.data.apiTheMovies.OneFilmViewModel
+import ru.dudar.findfilms.data.database.FilmsDbRepo
 import ru.dudar.findfilms.domain.GanrOb
-import ru.dudar.findfilms.data.repoDataBase.FilmsDbRepo
 
 private const val ARG_PARAM = "param"
 
