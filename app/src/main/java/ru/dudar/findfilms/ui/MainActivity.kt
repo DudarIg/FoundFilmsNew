@@ -52,11 +52,6 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
                 .commit()
         }
 
-        ActivityCompat.requestPermissions(this, arrayOf(
-            "android.permission.ACCESS_COARSE_LOCATION",
-            "android.permission.ACCESS_FINE_LOCATION"), LOCATION)
-
-
     }
 
     override fun onFilmSelect(film: Film) {

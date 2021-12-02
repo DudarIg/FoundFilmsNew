@@ -11,12 +11,31 @@ import ru.dudar.findfilms.databinding.FragmentSettingsBinding
 import ru.dudar.findfilms.domain.Disable
 import android.content.Intent
 import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import java.util.jar.Manifest
 
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+
+    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+
+        if (it) {
+            explain()
+        } else
+        {
+            binding.zeroTextView.isVisible = true
+            binding.explainTextView.isVisible = true
+            binding.locateButton.isVisible = true
+            binding.locateButton.setOnClickListener{
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,27 +47,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.explainTextView.isVisible = false
         binding.allowedTextView.isVisible = false
         binding.locateButton.isVisible = false
-        val explain = shouldShowRequestPermissionRationale("android.permission.ACCESS_COARSE_LOCATION")
-        val permisResultCoarse = checkSelfPermission(requireContext(),
-            "android.permission.ACCESS_COARSE_LOCATION")
-        val permisResultFine = checkSelfPermission(requireContext(),
-            "android.permission.ACCESS_FINE_LOCATION")
 
-        if (permisResultCoarse != PermissionChecker.PERMISSION_GRANTED ||
-                permisResultFine != PermissionChecker.PERMISSION_GRANTED) {
-            binding.zeroTextView.isVisible = true
-            if (explain)
-                binding.explainTextView.isVisible = true
-
-            binding.locateButton.isVisible = true
-            binding.locateButton.setOnClickListener{
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        } else {
-            explain()
-        }
-
+        permissionLauncher.launch("android.permission.ACCESS_FINE_LOCATION")
     }
 
     fun explain() {
