@@ -22,4 +22,6 @@
     <string name="is_views">Для просмотра</string>
     <string name="zero">Нет фильмов для просмотра</string>
     <string name="allowed">Продолжаем работу!</string>
+    <string name="kinoteaters">Показать кинотеатры</string>
+    <string name="alloweds">Настроить разрешения</string>
 </resources>
