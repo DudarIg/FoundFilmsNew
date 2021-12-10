@@ -19,6 +19,7 @@ import ru.dudar.findfilms.domain.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
+import java.util.*
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
@@ -27,6 +28,7 @@ private const val LOCATION = 1212
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
     MyAdapter.MyHolder.CallbacksDelete {
 
+    
     private val receiver = MainBroadcastReceiver()
 
     lateinit var toolbar: Toolbar
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        
         ganrOb[0] = getPreferences(MODE_PRIVATE).getInt(GANR1, 14)
         ganrOb[1] = getPreferences(MODE_PRIVATE).getInt(GANR2, 35)
 
