@@ -3,7 +3,10 @@
     <string name="as_programm">Посмотреть</string>
     <string name="views">Для просмотра</string>
     <string name="found_film">Жанры фильмов</string>
-    <string name="settings">Настройки</string>
+    <string name="settings">Местоположение усройства не определено. Страница недоступна.</string>
+    <string name="locate">Расположение.</string>
+    <string name="explain">Дайте разрешение на определение местоположения устройства. Данное разрешение необходимо разработчику для сбора
+        статистики о географическом распространении приложения с целью дальнейшего совершенствования его работы.</string>
     <string name="add_film">Добавить фильм</string>
     <string name="title">Название:</string>
     <string name="year">Год выхода:</string>
@@ -17,4 +20,8 @@
     <string name="ganry">Показать жанры</string>
     <string name="cite">TheMovieDb.org</string>
     <string name="is_views">Для просмотра</string>
+    <string name="zero">Нет фильмов для просмотра</string>
+    <string name="allowed">Продолжаем работу!</string>
+    <string name="kinoteaters">Показать кинотеатры</string>
+    <string name="alloweds">Настроить разрешения</string>
 </resources>

@@ -8,23 +8,27 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.dudar.findfilms.R
 import ru.dudar.findfilms.data.Film
-import ru.dudar.findfilms.data.MainBroadcastReceiver
-import ru.dudar.findfilms.data.ServiceFilmView
+import ru.dudar.findfilms.data.database.FilmsDbRepo
+import ru.dudar.findfilms.domain.MainBroadcastReceiver
+import ru.dudar.findfilms.domain.ServiceFilmView
 import ru.dudar.findfilms.domain.Disable
 import ru.dudar.findfilms.domain.GanrOb.ganrOb
 import ru.dudar.findfilms.domain.MyAdapter
-import ru.dudar.findfilms.domain.repoDataBase.FilmsDbRepo
+import java.util.*
 
 private const val GANR1 = "ganr1"
 private const val GANR2 = "ganr2"
+private const val LOCATION = 1212
 
 class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
     MyAdapter.MyHolder.CallbacksDelete {
 
+    
     private val receiver = MainBroadcastReceiver()
 
     lateinit var toolbar: Toolbar
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        
         ganrOb[0] = getPreferences(MODE_PRIVATE).getInt(GANR1, 14)
         ganrOb[1] = getPreferences(MODE_PRIVATE).getInt(GANR2, 35)
 
@@ -49,6 +54,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
+
     }
 
     override fun onFilmSelect(film: Film) {
@@ -62,6 +68,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
+
             .commit()
     }
 
@@ -73,6 +80,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
     private fun initToolbar() {
         toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
     }
 
     private fun initBottomMenu() {
@@ -81,6 +89,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
             val fragment: Fragment
             when (item.itemId) {
                 R.id.as_programm -> {
+                    supportFragmentManager.popBackStack()
                     fragment = MainFilmsFragment.newInstance()
                 }
                 R.id.found_film -> {
@@ -94,6 +103,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
                     fragment = MainFilmsFragment.newInstance()
                 }
             }
+            supportFragmentManager.popBackStack()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -141,4 +151,5 @@ class MainActivity : AppCompatActivity(), MyAdapter.MyHolder.Callbacks, Disable,
             }
         }.show()
     }
+
 }

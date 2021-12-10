@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.apiTheMovies
+package ru.dudar.findfilms.data.apiTheMovies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.dudar.findfilms.data.Film
 import ru.dudar.findfilms.data.Ganr
-import ru.dudar.findfilms.domain.Themoviesgenres.TheMovieGenres
-import ru.dudar.findfilms.domain.films.Films
+import ru.dudar.findfilms.data.Themoviesgenres.TheMovieGenres
+import ru.dudar.findfilms.data.films.Films
 private const val BASEURL = "https://api.themoviedb.org/3/"
 
 class ApiBookImpl {
@@ -47,7 +47,6 @@ class ApiBookImpl {
             override fun onFailure(call: Call<TheMovieGenres>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-
         }
         )
         return responseLiveData
@@ -80,5 +79,4 @@ class ApiBookImpl {
         )
         return responseLiveData
     }
-
 }

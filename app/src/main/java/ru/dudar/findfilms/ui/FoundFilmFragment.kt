@@ -1,15 +1,19 @@
 package ru.dudar.findfilms.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.dudar.findfilms.R
-import ru.dudar.findfilms.apiTheMovies.GanresViewModel
+import ru.dudar.findfilms.data.apiTheMovies.GanresViewModel
 import ru.dudar.findfilms.data.Ganr
 import ru.dudar.findfilms.databinding.FragmentFoundFilmBinding
 import ru.dudar.findfilms.domain.Disable
@@ -24,6 +28,8 @@ class FoundFilmFragment : Fragment(R.layout.fragment_found_film) {
     private val sb: MutableList<Ganr> = mutableListOf()
     private val ganrViewModel by viewModels<GanresViewModel>()
 
+
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoundFilmBinding.bind(view)

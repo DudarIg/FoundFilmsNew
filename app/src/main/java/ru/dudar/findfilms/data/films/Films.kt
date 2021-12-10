@@ -1,4 +1,4 @@
-package ru.dudar.findfilms.domain.films
+package ru.dudar.findfilms.data.films
 
 import com.google.gson.annotations.SerializedName
 

@@ -5,10 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-
-//import android.os.Parcelable
-//import kotlinx.parcelize.Parcelize
-
 @Entity(tableName = "filmsviews")
 data class Film  (
     @PrimaryKey
