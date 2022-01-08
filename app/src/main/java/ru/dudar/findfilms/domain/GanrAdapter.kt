@@ -19,22 +19,6 @@ class GanrAdapter(private val ganrs: List<Ganr>):
         val id: TextView = itemView.findViewById(R.id.title_text_view)
         val name : TextView = itemView.findViewById(R.id.name_text_view)
         val viv : CheckBox = itemView.findViewById(R.id.viv_checkBox)
-
-        fun setData(ganr: Ganr) {
-            id.text = ganr.id.toString()
-            name.text = ganr.name
-            viv.isChecked = ganr.viv
-
-            itemView.setOnClickListener {
-               if (viv.isChecked) {
-                     viv.isChecked = false
-                     ganr.viv = false
-                 }
-                    else {
-                    viv.isChecked = true
-                    ganr.viv = true}
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -45,7 +29,21 @@ class GanrAdapter(private val ganrs: List<Ganr>):
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val ganr = ganrs[position]
-        holder.setData(ganr)
+
+        holder.id.text = ganr.id.toString()
+        holder.name.text = ganr.name
+        holder.viv.isChecked = ganr.viv
+
+        holder.itemView.setOnClickListener {
+            if (holder.viv.isChecked) {
+                holder.viv.isChecked = false
+                ganr.viv = false
+            }
+            else {
+                holder.viv.isChecked = true
+                ganr.viv = true}
+        }
+
     }
 
     override fun getItemCount(): Int {
